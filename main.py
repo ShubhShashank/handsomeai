@@ -21,8 +21,8 @@ initEvent()
 
 while True:
     console_input = raw_input(input_def)
-    if "pmgr" in console_input:
-        pass
+    if "pmgr install" in console_input:
+        pmgr.install(console_input[12:])
     elif console_input == "ai":
         pass
     else:
