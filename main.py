@@ -8,8 +8,10 @@ def initEvent():
     global pkglist
     global os
     global pmgr
+    global error
     import os
     import pmgr
+    import error.errormgrcore as error
     current_os_dir = os.getcwd()
     current_local_dir = "home"
     input_def = "LOCAL://" + current_local_dir + ":"
@@ -28,7 +30,13 @@ while True:
     else:
         pkg_found = "null"
         if os.path.isfile('pkg/%s/main.py' % console_input):
-            os.system('python pkg/%s/main.py' % console_input)
+            pkg_mod = __import__(('pkg.' + console_input + '.main'), fromlist=[''])
+            try:
+                pkg_mod.main()
+            except AttributeError:
+                os.system('python pkg/%s/main.py' % console_input)
+            else:
+                error.unknown(pkg_mod.main)
             pkg_found = True
         if pkg_found != True:
             print "Unknown command or executable package"
