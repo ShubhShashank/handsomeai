@@ -19,8 +19,16 @@ def ai():
                     csv_file = open((line + '/ai/' + file), 'r')
                     for line in csv_file:
                         cell = line.split(',')
-                        if u == cell[0]:
-                            prl.append(cell[1])
+                        qas = 0
+                        if random.randint(1,7) == 4:
+                            while len(cell) > qas:
+                                if u == cell[(qas)]:
+                                    print (cell[(qas+1)])
+                                u = raw_input().lower()
+                            prl.append('')
+                        else:
+                            if len(cell) < 3 and u == cell[0]:
+                                prl.append(cell[1])
                     csv_file.close()
         if len(prl) > 0:
             print random.choice(prl)

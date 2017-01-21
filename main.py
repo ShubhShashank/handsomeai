@@ -11,11 +11,13 @@ def initEvent():
     global error
     global sys
     global ai
+    global learn
     import os
     import pmgr
     import error.errormgrcore as error
     import sys
     import ai.ai as ai
+    import ai.ailearn as learn
     current_os_dir = os.getcwd()
     current_local_dir = "home"
     input_def = "LOCAL://" + current_local_dir + ":"
@@ -35,6 +37,11 @@ while True:
         ai.ai()
     elif console_input == "exit":
         sys.exit()
+    elif "ai learn" in console_input:
+        if len(console_input) > 8:
+            learn.learn(console_input[9:])
+        else:
+            learn.learn('null')
     else:
         pkg_found = "null"
         if os.path.isfile('pkg/%s/main.py' % console_input):
