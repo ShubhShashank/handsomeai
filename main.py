@@ -27,6 +27,8 @@ while True:
     console_input = raw_input(input_def)
     if "pmgr install" in console_input:
         pmgr.install(console_input[12:])
+    elif "pmgr uninstall" in console_input:
+        pmgr.uninstall(console_input[14:])
     elif console_input == "ai":
         pass
     elif console_input == "exit":

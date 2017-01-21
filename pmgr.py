@@ -1,12 +1,29 @@
 def install(pkg):
     import zipfile
     import urllib2
-    allpkglist = open('allpkg.list', 'r')
     pkglist = open('pkg/pkg.list', 'a')
-    for line in allpkglist:
-        if pkg in line:
-            pkgurl = line[(len(pkg)+1):]
-            pkgfile = urllib2.urlopen(pkgurl)
-            pkgzip = zipfil.ZipFile(pkgfile, 'r')
-            pkgzip.extractall(('pkg/%s' % pkg))
-            pkglist.write(pkg)
+    user = raw_input("Uploader's Username: ")
+    pkgurl = "https://github.com/" + user + "/" + pkg + "/zip/master"
+    pkgfile = urllib2.urlopen(pkgurl)
+    pkgzip = zipfil.ZipFile(pkgfile, 'r')
+    pkgzip.extractall(('pkg/%s' % pkg))
+    pkglist.write(pkg)
+
+def uninstall(pkg):
+    sure = raw_input("Are you sure you want to delete %s (Y/N): " % pkg)
+    if sure == "Y":
+        import shutil
+        import os
+        shutil.rmtree(('pkg/' + pkg))
+        pkglist = open('pkg/pkg.list', 'r')
+        pkglist_lines = pkglist.readlines()
+        pkglist.close()
+        os.remove('pkg/pkg.list')
+        pkglist = open('pkg/pkg.list', 'w')
+        for line in pkglist_lines:
+            if line != pkg:
+                pkglist.write(line)
+        pkglist.close()
+    else:
+        print ("Understood, wont delete %s" % pkg)
+
