@@ -9,9 +9,11 @@ def initEvent():
     global os
     global pmgr
     global error
+    global sys
     import os
     import pmgr
     import error.errormgrcore as error
+    import sys
     current_os_dir = os.getcwd()
     current_local_dir = "home"
     input_def = "LOCAL://" + current_local_dir + ":"
@@ -27,6 +29,8 @@ while True:
         pmgr.install(console_input[12:])
     elif console_input == "ai":
         pass
+    elif console_input == "exit":
+        sys.exit()
     else:
         pkg_found = "null"
         if os.path.isfile('pkg/%s/main.py' % console_input):
@@ -36,7 +40,7 @@ while True:
             except AttributeError:
                 os.system('python pkg/%s/main.py' % console_input)
             else:
-                error.unknown(pkg_mod.main)
+                error.unknown(pkg_mod.main())
             pkg_found = True
         if pkg_found != True:
             print "Unknown command or executable package"
