@@ -17,8 +17,8 @@ def learn(where):
     while q == "N":
         row = []
         while i == "Y":
-            row.append(raw_input("Question: "))
-            row.append(raw_input("Awnser: "))
+            row.append(raw_input("Question: ").lower().replace(',', '[comma]').replace('[space]', ' '))
+            row.append(raw_input("Awnser: ").replace(',', '[comma]').replace('[space]', ' '))
             i = raw_input("Continue (Y/N): ")
         cfile.writerow(row)
         q = raw_input("Exit or new (E/N): ")
