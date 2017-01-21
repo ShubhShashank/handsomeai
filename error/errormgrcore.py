@@ -1,3 +1,5 @@
+import warning
+
 def unknown(what):
     what_str = str(what)
     try:
@@ -59,7 +61,7 @@ def unknown(what):
     except ZeroDivisionError:
         print "Error 126 - ZeroDivisionError"
     except Warning:
-        print "Warning - Some Warning"
+        print warning.main(what)
 
 def unknownReturn(what):
     what_str = str(what)
@@ -120,4 +122,4 @@ def unknownReturn(what):
     except ZeroDivisionError:
         return "Error 126 - ZeroDivisionError"
     except Warning:
-        return "Warning - Some Warning"
+        return warning.main(what)
