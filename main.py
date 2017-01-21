@@ -10,10 +10,12 @@ def initEvent():
     global pmgr
     global error
     global sys
+    global ai
     import os
     import pmgr
     import error.errormgrcore as error
     import sys
+    import ai.ai as ai
     current_os_dir = os.getcwd()
     current_local_dir = "home"
     input_def = "LOCAL://" + current_local_dir + ":"
@@ -30,7 +32,7 @@ while True:
     elif "pmgr uninstall" in console_input:
         pmgr.uninstall(console_input[14:])
     elif console_input == "ai":
-        pass
+        ai.ai()
     elif console_input == "exit":
         sys.exit()
     else:
