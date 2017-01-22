@@ -37,3 +37,4 @@ def update():
         pkgzip = zipfile.ZipFile(pkgfile, 'r')
         shutil.rmtree(('pkg/%s' % line))
         pkgzip.extractall(('pkg/%s' % line))
+        update.close()

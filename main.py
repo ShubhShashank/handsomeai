@@ -33,6 +33,8 @@ while True:
         pmgr.install(console_input[12:])
     elif "pmgr uninstall" in console_input:
         pmgr.uninstall(console_input[14:])
+    elif "pmgr update" == console_input:
+        pmgr.update()
     elif console_input == "ai":
         ai.ai()
     elif console_input == "exit":
