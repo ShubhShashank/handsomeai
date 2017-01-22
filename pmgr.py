@@ -5,7 +5,7 @@ def install(pkg):
     user = raw_input("Uploader's Username: ")
     pkgurl = "https://github.com/" + user + "/" + pkg + "/zip/master"
     pkgfile = urllib2.urlopen(pkgurl)
-    pkgzip = zipfil.ZipFile(pkgfile, 'r')
+    pkgzip = zipfile.ZipFile(pkgfile, 'r')
     pkgzip.extractall(('pkg/%s' % pkg))
     pkglist.write(pkg)
 
@@ -27,3 +27,13 @@ def uninstall(pkg):
     else:
         print ("Understood, wont delete %s" % pkg)
 
+def update():
+    import urllib2
+    import zipfile
+    pkglist = open('pkg/pkg.list', 'r')
+    for line in pkglist:
+        update = open(('pkg/%s/update' % line), 'r')
+        pkgfile = urllib2.urlopen(update)
+        pkgzip = zipfile.ZipFile(pkgfile, 'r')
+        shutil.rmtree(('pkg/%s' % line))
+        pkgzip.extractall(('pkg/%s' % line))
